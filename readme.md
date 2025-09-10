@@ -36,15 +36,6 @@
 
 ## Structure
 
-   LG/
-├── dags/
-│   └── etl_pipeline.py   # the main DAG
-├── etl/
-│   ├── load.py           # uploading to MS SQL Server
-│   ├── scraper.py        # parsing and saving Json
-│   └── transform.py      # data processing and transformation
-├── docker-compose.yml    # the Docker environment
-├── requirements.txt      # Python dependencies
-└── logs/                 # task logs
+``` LG/ ├── dags/ │ └── etl_pipeline.py # основной DAG ├── etl/ │ ├── load.py # загрузка в MS SQL Server │ ├── scraper.py # парсинг и сохранение JSON │ └── transform.py # обработка и трансформация ├── docker-compose.yml # окружение Docker ├── requirements.txt # зависимости Python └── logs/ # логи задач ```
 
 
