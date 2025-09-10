@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+
+# Virtual environment
+venv/
+.venv/
+
+# Airflow
+airflow/
+*.airflowignore
+
+# VSCode / PyCharm
+.vscode/
+.idea/
+
+# Docker
+*.pid
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db

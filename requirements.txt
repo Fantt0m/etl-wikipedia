@@ -1,0 +1,22 @@
+# Core
+pandas
+sqlalchemy
+pyodbc
+python-dotenv
+
+# Web scraping
+beautifulsoup4
+requests
+
+
+# Validation & Testing
+pydantic
+pytest
+
+
+# Orchestration
+apache-airflow
+
+# Dev
+black
+isort
