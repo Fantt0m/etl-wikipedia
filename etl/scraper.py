@@ -1,32 +1,31 @@
 import requests
 from bs4 import BeautifulSoup
-import json
 from datetime import datetime
 
-url = "https://en.wikipedia.org/wiki/Portal:Current_events"
+url = "https://habr.com/ru/articles/"
 response = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
 html = response.text
 soup = BeautifulSoup(html, "html.parser")
 
 def parse():
     articles = []
-    # проходим по дням (заголовки h3 = даты)
-    for day_block in soup.select("div.vevent"):
-        date_tag = day_block.find("h3")  # дата блока
-        published = date_tag.text.strip() if date_tag else datetime.utcnow().isoformat()
+    for item in soup.select("article.tm-articles-list__item"):   # блок статьи
+        link_tag = item.select_one("h2.tm-title a")             # заголовок и ссылка
+        time_tag = item.find("time")
 
-        # вытаскиваем статьи в этом блоке
-        for li in day_block.select("ul > li"):
-            link_tag = li.find("a")
-            if link_tag and "href" in link_tag.attrs:
-                title = link_tag.text.strip()
-                link = "https://en.wikipedia.org" + link_tag["href"]
+        if link_tag:
+            title = link_tag.text.strip()
+            link = link_tag["href"]
+            if link.startswith("/"):
+                link = "https://habr.com" + link  # дополняем относительный путь
 
-                articles.append({
-                    "title": title,
-                    "link": link,
-                    "published": published
-                })
+            published = time_tag["datetime"] if time_tag and "datetime" in time_tag.attrs else datetime.utcnow().isoformat()
+
+            articles.append({
+                "title": title,
+                "link": link,
+                "published": published
+            })
     return articles
 
 if __name__ == "__main__":
